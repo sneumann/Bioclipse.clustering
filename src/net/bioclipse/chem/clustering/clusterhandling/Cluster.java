@@ -12,14 +12,16 @@ package net.bioclipse.chem.clustering.clusterhandling;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import net.bioclipse.core.domain.IMolecule;
 public class Cluster {
 	
-	public List<Object> elementList;
+	public List<IMolecule> elementList;
 	public Cluster()
 	{
-		elementList = new LinkedList<Object>();
+		elementList = new LinkedList<IMolecule>();
 	}
-	public void addElement(Object o)
+	public void addElement(IMolecule o)
 	{
 		elementList.add(o);
 	}

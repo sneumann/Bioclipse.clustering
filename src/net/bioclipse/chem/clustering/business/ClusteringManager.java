@@ -10,8 +10,12 @@
  ******************************************************************************/
 package net.bioclipse.chem.clustering.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.bioclipse.chem.clustering.clusterhandling.*;
 import net.bioclipse.core.business.BioclipseException;
+import net.bioclipse.core.domain.IMolecule;
 import net.bioclipse.managers.business.IBioclipseManager;
 
 import org.apache.log4j.Logger;
@@ -27,6 +31,27 @@ public class ClusteringManager implements IBioclipseManager {
     public String getManagerName() {
         return "clustering";
     }
+    public ClusterList doClustering(List<IMolecule> molecules, int numClusts) throws BioclipseException
+    {
+    	/*
+    	 * This method does default clustering of Molecules, using
+    	 * algorithms present in the clusterhandling package. 
+    	 */
+    	logger.info("Entering doClustering");
+    	
+    	try {
+    	ClusterList cL = new ClusterList(molecules, 
+    								     new SingleLinkAlgo());
+    	logger.info("Clustering list of " + cL.getSize() + "Elements");
+
+    	cL.setDa(new MoleculeDistAlgo());
+    	cL.doClustering(numClusts);
+    	return cL;
+    	} catch (Exception e) {
+    		logger.info("Exception: " + e.getMessage());
+    	}
+    	return null;
+    }
     public ClusterList doClustering(ClusterList cL, int numClusts) throws BioclipseException
     {
     	/*
@@ -37,12 +62,5 @@ public class ClusteringManager implements IBioclipseManager {
     	cL.setDa(new MoleculeDistAlgo());
     	cL.doClustering(numClusts);
     	return cL;
-    }
-    public ClusterList doClustering(ClusterList cL, int NumberClusts, IDistanceAlgorithm dA, IClusteringAlgorithm cA)
-    {
-    	/*
-    	 * This variation of the method allows customized algorithms
-    	 */
-    	return null;
     }
 }

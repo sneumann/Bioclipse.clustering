@@ -68,8 +68,8 @@ public class ViewClustering extends ViewPart implements ISelectionListener{
 		 */
 			try{
 				ClusterList cl = new ClusterList();
-				List l = getMolecules(file);
-				for (Object o : l) {
+				List<IMolecule> l = getMolecules(file);
+				for (IMolecule o : l) {
 					Cluster clust = new Cluster();
 					clust.addElement(o);
 					cl.add(clust);

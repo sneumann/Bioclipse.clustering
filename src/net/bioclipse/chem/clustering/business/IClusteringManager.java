@@ -10,11 +10,14 @@
  ******************************************************************************/
 package net.bioclipse.chem.clustering.business;
 
+import java.util.List;
+
 import net.bioclipse.chem.clustering.clusterhandling.ClusterList;
 import net.bioclipse.chem.clustering.clusterhandling.IClusteringAlgorithm;
 import net.bioclipse.chem.clustering.clusterhandling.IDistanceAlgorithm;
 import net.bioclipse.core.PublishedClass;
 import net.bioclipse.core.PublishedMethod;
+import net.bioclipse.core.domain.IMolecule;
 import net.bioclipse.managers.business.IBioclipseManager;
 
 @PublishedClass(
@@ -22,18 +25,12 @@ import net.bioclipse.managers.business.IBioclipseManager;
 )
 public interface IClusteringManager extends IBioclipseManager {
 	@PublishedMethod(
-	        params = "ClusterList cL, int numberClusters",
+	        params = "List<IMolecule> molecules, int numberClusters",
 	        methodSummary = "Using default algorithms, produces" +
 	                        "NumberClusters clusters from a " +
 	                        "list of Molecules"
 	    )
-	public ClusterList doClustering(ClusterList cL, int numberClusts);
-	@PublishedMethod(
-	        params = "ClusterList cL, int numberClusters, IDistanceAlgorithm dA, IClusteringAlgorithm cA",
-	        methodSummary = "Using specified algorithms, produces" +
-	                        "NumberClusters clusters from a " +
-	                        "list of Molecules"
-	    )
-	public ClusterList doClustering(ClusterList cL, int numberClusts, IDistanceAlgorithm dA, IClusteringAlgorithm cA);
+	public ClusterList doClustering(List<IMolecule> molecules, int numberClusts);
+	
 
 }

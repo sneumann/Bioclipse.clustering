@@ -3,6 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.bioclipse.core.business.BioclipseException;
+import net.bioclipse.core.domain.IMolecule;
 /*
  * This class represents the list of clusters. It will
  * be initialized with each element in its own cluster
@@ -20,7 +21,7 @@ public class ClusterList {
 	}
 	private IDistanceAlgorithm dA;
 	
-	public ClusterList(List<Object> elementList, IClusteringAlgorithm cA){
+	public ClusterList(List<IMolecule> elementList, IClusteringAlgorithm cA){
 		this.cA = cA;
 		/*
 		 * Constructor will take lists of Elements and create
@@ -28,7 +29,9 @@ public class ClusterList {
 		 */
 		while (elementList.iterator().hasNext())
 		{
-			clusterList.add((Cluster)(elementList.iterator().next()));
+			Cluster c = new Cluster();
+			c.addElement(elementList.iterator().next());
+			clusterList.add(c);
 		}
 	}
 	public ClusterList()
